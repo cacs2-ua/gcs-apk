@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="formLogin" class="list-form">
+  <ion-item no-padding class="animated fadeInUp">
+    <ion-label position="floating">
+      <ion-icon name="mail" item-start></ion-icon>
+      Tu correo
+    </ion-label>
+    <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+  </ion-item>
+
+  <p ion-text class="text08" *ngIf="formLogin.get('email').touched && formLogin.get('email').hasError('required')">
+    <ion-text color="warning">Debes escribir tu e-mail</ion-text>
+  </p>
+
+  <p ion-text class="text08" *ngIf="formLogin.get('email').touched && formLogin.get('email').hasError('email')">
+    <ion-text color="warning">Debes escribir una dirección de correo correcta</ion-text>
+  </p>
+
+  <ion-item no-padding class="animated fadeInUp">
+    <ion-label position="floating">
+      <ion-icon name="lock-closed-outline" item-start></ion-icon>
+      Contraseña
+    </ion-label>
+    <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+  </ion-item>
+  
+  <div>
+  <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="doLogin()" [disabled]="!formLogin.valid" tappable>
+    <ion-icon name="log-in"></ion-icon>
+    Entrar
+  </ion-button>
+</div>
+
+</form>
+<ion-alert
+[isOpen]="error!=''"
+header="Warning!"
+[message]="error"
+[buttons]="['OK']"
+(didDismiss)="error=''"
+></ion-alert>
+</ion-content>
